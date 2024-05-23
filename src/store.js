@@ -6,7 +6,16 @@ const store = createStore({
     return {
       products: [
         { name: 'Justin Septimus', email: 'example@email.com', status: 'Active', paidstatus: 'Paid', price: 200 },
+        { name: 'Anika Rhiel Madsen', email: 'example@email.com', status: 'Active', paidstatus: 'Overdue', price: 300 },
         { name: 'Anika Rhiel Madsen', email: 'example@email.com', status: 'Active', paidstatus: 'Paid', price: 300 },
+        { name: 'Erin Levin', email: 'example@email.com', status: 'Active', paidstatus: 'Unpaid', price: 200 },
+        { name: 'Mira Herwitz', email: 'example@email.com', status: 'Inactive', paidstatus: 'Paid', price: 300 },
+        { name: 'Jaxson Siphron', email: 'example@email.com', status: 'Inactive', paidstatus: 'Paid', price: 300 },
+        {name: 'Mira Levin', email: 'example@email.com', status: 'Active', paidstatus: 'Unpaid', price: 200 },
+        { name: 'Lincoln Levin', email: 'example@email.com', status: 'Active', paidstatus: 'Paid', price: 300 },
+        {name: 'Phillip Saris', email: 'example@email.com', status: 'Inactive', paidstatus: 'Unpaid', price: 200 },
+        { name: 'Cheyenne Ekstrom Bothman', email: 'example@email.com', status: 'Inactive', paidstatus: 'Paid', price: 300 },
+
       ],
 
       paidusers: [
@@ -39,6 +48,9 @@ const store = createStore({
   getters: {
     getProducts(state) {
       return state.products;
+    },
+    getProductsTwo(state) {
+      return state.productstwo;
     },
     getPaidUser(state) {
       return state.paidusers;

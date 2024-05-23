@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between flex-col mb-5">
-      <div class="flex justify-between mb-4">
+      <div class="flex justify-between">
         <div class="flex gap-10">
           <button
             :class="{ 'border-b-primary border-b-[4px] w-10': selectedTab!== 'paid' && selectedTab!== 'unpaid' && selectedTab!== 'overdue' }"
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700 mb-4">
+      <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700 mb-7">
     <!-- <hr /> -->
     <UserTable v-show="selectedTab === 'all'" :products="filteredProducts"/>
     <PaidUserTable v-if="selectedTab === 'paid'" :paidusers="filteredUser"/>

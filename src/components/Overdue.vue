@@ -1,7 +1,7 @@
 <!-- userTable.vue -->
 <template>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg pb-5">
-      <div class="bg-white p-3">
+      <div class="overflow-x-auto bg-white p-3">
         <div class="flex justify-between">
           <div class="flex items-center gap-3">
             <div class="flex items-center gap-1 border-2 border-[#C6C2DE] p-1 rounded-md">
@@ -27,7 +27,9 @@
               </div>
               <input type="text"
                 class="bg-[#F4F2FF] border border-[#F4F2FF] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-10 pr-[] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Search Users by Name, Email or Date">
+                placeholder="Search Users by Name, Email or Date"
+                v-model="searchTerm"
+                >
             </div>
           </div>
   
@@ -67,7 +69,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in overdueusers" :key="index"
+          <tr v-for="(user, index) in filteredUnOverdueUser" :key="index"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td class="w-4 p-4">
               <div class="flex items-center gap-3">
@@ -159,15 +161,57 @@
         </tbody>
       </table>
       <!-- second table -->
-      <div class="flex justify-end">
-        <span>Rows per page 10</span>
+      <div class="flex justify-end mt-5">
+        <div class="flex justify-between gap-10 items-center text-[#6E6893] font-semibold">
+          <div class="flex items-center">
+            <span>Rows per page: 10</span>
+            <span>
+              <svg class="w-5 h-5" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"
+                stroke="#000000" stroke-width="0.00024000000000000003">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M17.9188 8.17969H11.6888H6.07877C5.11877 8.17969 4.63877 9.33969 5.31877 10.0197L10.4988 15.1997C11.3288 16.0297 12.6788 16.0297 13.5088 15.1997L15.4788 13.2297L18.6888 10.0197C19.3588 9.33969 18.8788 8.17969 17.9188 8.17969Z"
+                    fill="#6E6893"></path>
+                </g>
+              </svg>
+            </span>
+          </div>
+  
+          <div>
+            1-10 of 276
+          </div>
+  
+          <div class="flex items-center gap-10">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M15 7L10 12L15 17" stroke="#6E6893" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </g>
+            </svg>
+            <svg class="w-7 h-6" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#6E6893">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path fill="#6E6893"
+                  d="M340.864 149.312a30.592 30.592 0 0 0 0 42.752L652.736 512 340.864 831.872a30.592 30.592 0 0 0 0 42.752 29.12 29.12 0 0 0 41.728 0L714.24 534.336a32 32 0 0 0 0-44.672L382.592 149.376a29.12 29.12 0 0 0-41.728 0z">
+                </path>
+              </g>
+            </svg>
+          </div>
+  
+        </div>
       </div>
     </div>
   </template>
   
   <script>
   import { BeakerIcon } from '@heroicons/vue/24/solid';
-  
+  import { mapGetters } from 'vuex';
+
   export default {
   components: { BeakerIcon },
   name: 'Overdue',
@@ -176,6 +220,32 @@
       type: Array,
       required: true
     }
+  },
+  data() {
+    return {
+      searchTerm: '',
+      // Other data properties remain here
+    };
+  },
+  computed: {
+  ...mapGetters(['getUnOverdueUser']),
+  filteredUnOverdueUser() {
+    if (!this.searchTerm) {
+      return this.overdueusers;
+    }
+    const search = this.searchTerm.toLowerCase();
+    return this.overdueusers.filter(overdueuser => {
+      const name = overdueuser.name ? overdueuser.name.toLowerCase() : '';
+      const email = overdueuser.email ? overdueuser.email.toLowerCase() : '';
+      const userStatus = overdueuser.userStatus ? overdueuser.userStatus.toLowerCase() : '';
+      const paymentStatus = overdueuser.paymentStatus ? product.paymentStatus.toLowerCase() : '';
+
+      return name.includes(search) ||
+             email.includes(search) ||
+             userStatus.includes(search) ||
+             paymentStatus.includes(search);
+    });
+  },
   },
   created() {
     console.log('Paid Users:', this.paidusers);
