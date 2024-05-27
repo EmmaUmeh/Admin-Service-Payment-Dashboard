@@ -233,7 +233,7 @@ export default {
     paymentStatusClass(status) {
       switch (status) {
         case 'Paid':
-          return 'bg-statusbgPaid text-[#53AC92] dark:text-blue-500';
+          return 'bg-statusbgPaid  dark:text-blue-500';
         default:
           return '';
       }
@@ -241,7 +241,7 @@ export default {
     circleClass(status) {
       switch (status) {
         case 'Paid':
-          return 'bg-[#009C5A] dark:bg-blue-500';
+          return 'bg-statusTextColor dark:bg-blue-500';
         default:
           return '';
       }
@@ -249,7 +249,7 @@ export default {
     textClass(status) {
       switch (status) {
         case 'Paid':
-          return 'text-[#53AC92]';
+          return 'text-statusTextColor';
         default:
           return '';
       }

@@ -380,7 +380,7 @@ export default {
     paymentStatusClass(status) {
       switch (status) {
         case 'Paid':
-          return 'bg-statusbgPaid text-[#53AC92] dark:text-blue-500';
+          return 'bg-statusbgPaid dark:text-blue-500';
           case 'Overdue':
           return 'bg-statusOverduebg text-statusOverdueText dark:text-blue-500';
         default:
@@ -390,7 +390,7 @@ export default {
     circleClass(status) {
       switch (status) {
         case 'Paid':
-          return 'bg-[#009C5A] dark:bg-blue-500';
+          return 'bg-statusTextColor dark:bg-blue-500';
           case 'Overdue':
           return 'bg-statusOverdueText dark:bg-blue-500';
           
@@ -401,7 +401,7 @@ export default {
     textClass(status) {
       switch (status) {
         case 'Paid':
-          return 'text-[#53AC92]';
+          return 'text-statusTextColor';
         default:
           return '';
       }
@@ -422,7 +422,7 @@ export default {
         case 'Unpaid':
           return 'bg-[#CE8500] dark:bg-blue-500';
           case 'Paid':
-          return 'bg-[#009C5A] dark:bg-blue-500';
+          return 'bg-statusTextColor dark:bg-blue-500';
           
         default:
           return '';
@@ -433,7 +433,7 @@ export default {
         case 'Unpaid':
           return 'text-[#CE8500]';
           case 'Paid':
-          return 'text-[#53AC92]';
+          return 'text-statusTextColor';
         default:
           return '';
       }

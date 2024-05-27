@@ -12,6 +12,7 @@ module.exports = {
         statusbgPaid: "#CDFFCD",
         statusOverduebg: "#FFE0E0",
         statusOverdueText: "#D30000",
+        statusTextColor : "#007F00",
         
       },
     },
